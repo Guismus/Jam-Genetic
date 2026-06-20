@@ -52,52 +52,54 @@
       <!-- C. Right HUD Control Board -->
       <div id="hud-panel" class="hud-panel glass">
         
-        <!-- Level Information -->
-        <div class="hud-section hud-level-info">
-          <h2 id="hud-level-title">Splicing 101</h2>
-          <p id="hud-level-desc">Loading lab environment...</p>
-        </div>
-
-        <!-- Objective card -->
-        <div class="hud-section hud-goal">
-          <h4>DIAGNOSTIC OBJECTIVE</h4>
-          <div class="hud-goal-card">
-            <div id="hud-goal-text" class="hud-goal-desc">Infect the central host cell using Shock.</div>
-            <div id="hud-goal-progress" class="hud-goal-progress">Progress: 0 / 1</div>
-          </div>
-        </div>
-
-        <!-- Injections selection -->
-        <div class="hud-section">
-          <h4 style="font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 10px;">
-            INJECT STIMULUS
-          </h4>
-          <div id="injection-selector" class="injection-selector">
-            <!-- Populated dynamically -->
+        <div class="hud-body">
+          <!-- Level Information -->
+          <div class="hud-section hud-level-info">
+            <h2 id="hud-level-title">Splicing 101</h2>
+            <p id="hud-level-desc">Loading lab environment...</p>
           </div>
 
-          <!-- Sandbox placing tools (hidden by default) -->
-          <div id="sandbox-toolbar" class="sandbox-toolbar hidden">
-            <button class="sandbox-tool active" data-tool="select">SELECT</button>
-            <button class="sandbox-tool" data-tool="cell">+CELL</button>
-            <button class="sandbox-tool" data-tool="wall">+WALL</button>
-            <button class="sandbox-tool" data-tool="delete">DEL</button>
-          </div>
-        </div>
-
-        <!-- Live Statistics -->
-        <div class="hud-section">
-          <h4 style="font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 10px;">
-            ENERGY METRICS
-          </h4>
-          <div class="hud-stats-grid">
-            <div class="stat-card">
-              <div class="stat-label">TOTAL KINETIC ENERGY</div>
-              <div id="stat-energy" class="stat-value">0 J</div>
+          <!-- Objective card -->
+          <div class="hud-section hud-goal">
+            <h4>DIAGNOSTIC OBJECTIVE</h4>
+            <div class="hud-goal-card">
+              <div id="hud-goal-text" class="hud-goal-desc">Infect the central host cell using Shock.</div>
+              <div id="hud-goal-progress" class="hud-goal-progress">Progress: 0 / 1</div>
             </div>
-            <div class="stat-card">
-              <div class="stat-label">MAX CHAIN STEP</div>
-              <div id="stat-chain" class="stat-value">0</div>
+          </div>
+
+          <!-- Injections selection -->
+          <div class="hud-section">
+            <h4 style="font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 10px;">
+              INJECT STIMULUS
+            </h4>
+            <div id="injection-selector" class="injection-selector">
+              <!-- Populated dynamically -->
+            </div>
+
+            <!-- Sandbox placing tools (hidden by default) -->
+            <div id="sandbox-toolbar" class="sandbox-toolbar hidden">
+              <button class="sandbox-tool active" data-tool="select">SELECT</button>
+              <button class="sandbox-tool" data-tool="cell">+CELL</button>
+              <button class="sandbox-tool" data-tool="wall">+WALL</button>
+              <button class="sandbox-tool" data-tool="delete">DEL</button>
+            </div>
+          </div>
+
+          <!-- Live Statistics -->
+          <div class="hud-section">
+            <h4 style="font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 10px;">
+              ENERGY METRICS
+            </h4>
+            <div class="hud-stats-grid">
+              <div class="stat-card">
+                <div class="stat-label">TOTAL KINETIC ENERGY</div>
+                <div id="stat-energy" class="stat-value">0 J</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">MAX CHAIN STEP</div>
+                <div id="stat-chain" class="stat-value">0</div>
+              </div>
             </div>
           </div>
         </div>

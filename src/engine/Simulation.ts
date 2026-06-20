@@ -32,25 +32,25 @@ export class Simulation {
     this.cellChainDepths.clear();
     this.particles.clear();
 
-    // Trigger cell at injection coordinates if one exists
+    // Always spawn a burst of particles at the injection position for visual feedback
+    this.particles.spawnBurst(injectionCoords.x + 0.5, injectionCoords.y + 0.5, injectionType, 12, false);
+    // Give these particles a chain depth of 0
+    this.particles.particles.forEach(p => {
+      (p as any).chainDepth = 0;
+    });
+
+    // Also attempt to directly trigger the cell at injection coordinates if one exists
     const cell = this.grid.getCellAt(injectionCoords.x, injectionCoords.y);
     if (cell) {
       this.triggerCell(cell, 1, injectionType);
-    } else {
-      // Otherwise, spawn a burst of particles at that position to start the reaction
-      this.particles.spawnBurst(injectionCoords.x + 0.5, injectionCoords.y + 0.5, injectionType, 12, false);
-      // Give these particles a chain depth of 0
-      this.particles.particles.forEach(p => {
-        (p as any).chainDepth = 0;
-      });
     }
   }
 
   triggerCell(cell: GridCell, depth: number, type: TriggerType) {
     if (cell.state !== 'idle') return;
 
-    // Each trigger type only matches its own stimulus type, except IMPACT which reacts to any stimulus
-    if (cell.genome.trigger !== 'IMPACT' && cell.genome.trigger !== type) {
+    // Each trigger type only matches its own stimulus type
+    if (cell.genome.trigger !== type) {
       return;
     }
 
@@ -262,7 +262,8 @@ export class Simulation {
 
         const addDaughter = (x: number, y: number, dir: { dx: number; dy: number }) => {
           if (this.grid.isEmptyAt(x, y)) {
-            const daughter = this.grid.addCell(x, y, cell.genome, false, false);
+            const daughterGenome = { ...cell.genome, action: 'BURST' as ActionType };
+            const daughter = this.grid.addCell(x, y, daughterGenome, false, false);
             if (daughter) {
               daughter.slidingDir = dir;
               daughter.slideSpeed = isEnhanced ? 0.12 : 0.08;

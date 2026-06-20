@@ -139,6 +139,12 @@ export const LEVELS: Level[] = [
         genome: { trigger: 'HEAT', action: 'BURST', release: 'HEAT', modifier: 'NONE' }
       },
       {
+        x: 2,
+        y: 3,
+        isEditable: false,
+        genome: { trigger: 'HEAT', action: 'MUTATE', release: 'HEAT', modifier: 'NONE' }
+      },
+      {
         x: 3,
         y: 3,
         isEditable: false,
