@@ -127,6 +127,7 @@ export class Simulation {
         const roundedY = Math.round(nextY);
 
         let hitObstacle = false;
+        let hitCell: any = null;
 
         // Out of bounds?
         if (nextX < 0 || nextX >= this.grid.width || nextY < 0 || nextY >= this.grid.height) {
@@ -138,6 +139,7 @@ export class Simulation {
           const otherCell = this.grid.getCellAt(nextX, nextY);
           if (otherCell && otherCell.id !== cell.id) {
             hitObstacle = true;
+            hitCell = otherCell;
           }
         }
 
@@ -147,10 +149,25 @@ export class Simulation {
           cell.slidingDir = undefined;
           cell.slideSpeed = undefined;
           
-          // Trigger the sliding cell on IMPACT (since it hit something)
           const depth = this.cellChainDepths.get(cell.id) || 1;
-          cell.state = 'idle'; // Reset state to idle so trigger works
-          this.triggerCell(cell, depth + 1, 'IMPACT');
+          
+          // 1. Force trigger the sliding cell itself (explodes on physical impact)
+          cell.state = 'triggered';
+          cell.triggerTimer = 0;
+          cell.maxTriggerTimer = 0;
+          this.cellChainDepths.set(cell.id, depth + 1);
+          if (depth + 1 > this.maxChainStep) {
+            this.maxChainStep = depth + 1;
+          }
+          this.energyGenerated += 10;
+          if (this.onCellTriggered) {
+            this.onCellTriggered(cell);
+          }
+
+          // 2. If it hit another cell, trigger that cell with our release type
+          if (hitCell && hitCell.state === 'idle') {
+            this.triggerCell(hitCell, depth + 1, cell.genome.release);
+          }
         } else {
           cell.x = nextX;
           cell.y = nextY;
