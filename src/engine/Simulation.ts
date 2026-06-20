@@ -250,7 +250,12 @@ export class Simulation {
         let dir1 = { dx: 1, dy: 0 };
         let dir2 = { dx: -1, dy: 0 };
 
-        if (this.grid.isWallAt(cell.x + 1, cell.y) || this.grid.isWallAt(cell.x - 1, cell.y)) {
+        if (
+          this.grid.isWallAt(cell.x + 1, cell.y) || 
+          this.grid.isWallAt(cell.x - 1, cell.y) ||
+          cell.x + 1 >= this.grid.width ||
+          cell.x - 1 < 0
+        ) {
           dir1 = { dx: 0, dy: 1 };
           dir2 = { dx: 0, dy: -1 };
         }
