@@ -59,7 +59,10 @@ export class Grid {
 
   isEmptyAt(x: number, y: number): boolean {
     if (x < 0 || x >= this.width || y < 0 || y >= this.height) return false;
-    return !this.isWallAt(x, y) && !this.getCellAt(x, y);
+    const roundedX = Math.round(x);
+    const roundedY = Math.round(y);
+    const hasCell = this.cells.some(c => Math.round(c.x) === roundedX && Math.round(c.y) === roundedY);
+    return !this.isWallAt(x, y) && !hasCell;
   }
 
   addCell(x: number, y: number, genome: Genome, isEditable: boolean = false, isTarget: boolean = false): GridCell | null {
