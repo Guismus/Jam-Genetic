@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GENE-CHAIN: Genetic Chain Reaction Lab</title>
+  <link rel="stylesheet" href="./src/style.css">
+</head>
+<body>
+
+  <!-- 1. MAIN MENU SCREEN -->
+  <div id="menu-screen" class="screen">
+    <div class="logo-container">
+      <div class="logo-subtitle">BIO-INFORMATICS LABS</div>
+      <h1 class="title-glow">GENE-CHAIN</h1>
+      <div class="menu-tagline">Genetic Chain Reaction Diagnostics & Puzzle Lab</div>
+    </div>
+    <div class="menu-buttons">
+      <button id="play-btn" class="neon-btn">RUN SIMULATIONS</button>
+      <button id="sandbox-btn" class="neon-btn">GENETIC SANDBOX</button>
+    </div>
+  </div>
+
+  <!-- 2. LEVEL SELECT SCREEN -->
+  <div id="levels-screen" class="screen hidden">
+    <div class="levels-header" style="width: 100%;">
+      <div class="levels-title">DIAGNOSTIC TARGET MATRIX</div>
+      <button id="levels-back-btn" class="neon-btn" style="padding: 6px 16px; font-size: 0.8rem;">BACK TO TERMINAL</button>
+    </div>
+    <div id="levels-grid" class="levels-grid" style="width: 100%;">
+      <!-- Levels generated in GameUI.ts -->
+    </div>
+  </div>
+
+  <!-- 3. GAME RUNTIME SCREEN -->
+  <div id="game-screen" class="screen hidden">
+    <div class="game-layout">
+      
+      <!-- A. Splicer DNA Panel (Left Side Float) -->
+      <div id="splicer-panel" class="splicer-panel glass hidden">
+        <!-- Inside populated by SplicingPanel.ts -->
+      </div>
+
+      <!-- B. Center Canvas Viewport -->
+      <div class="canvas-container">
+        <canvas id="game-canvas"></canvas>
+        
+        <!-- Cell detail tooltip -->
+        <div id="cell-tooltip" class="cell-tooltip hidden"></div>
+      </div>
+
+      <!-- C. Right HUD Control Board -->
+      <div id="hud-panel" class="hud-panel glass">
+        
+        <!-- Level Information -->
+        <div class="hud-section hud-level-info">
+          <h2 id="hud-level-title">Splicing 101</h2>
+          <p id="hud-level-desc">Loading lab environment...</p>
+        </div>
+
+        <!-- Objective card -->
+        <div class="hud-section hud-goal">
+          <h4>DIAGNOSTIC OBJECTIVE</h4>
+          <div class="hud-goal-card">
+            <div id="hud-goal-text" class="hud-goal-desc">Infect the central host cell using Shock.</div>
+            <div id="hud-goal-progress" class="hud-goal-progress">Progress: 0 / 1</div>
+          </div>
+        </div>
+
+        <!-- Injections selection -->
+        <div class="hud-section">
+          <h4 style="font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 10px;">
+            INJECT STIMULUS
+          </h4>
+          <div id="injection-selector" class="injection-selector">
+            <!-- Populated dynamically -->
+          </div>
+
+          <!-- Sandbox placing tools (hidden by default) -->
+          <div id="sandbox-toolbar" class="sandbox-toolbar hidden">
+            <button class="sandbox-tool active" data-tool="select">SELECT</button>
+            <button class="sandbox-tool" data-tool="cell">+CELL</button>
+            <button class="sandbox-tool" data-tool="wall">+WALL</button>
+            <button class="sandbox-tool" data-tool="delete">DEL</button>
+          </div>
+        </div>
+
+        <!-- Live Statistics -->
+        <div class="hud-section">
+          <h4 style="font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 10px;">
+            ENERGY METRICS
+          </h4>
+          <div class="hud-stats-grid">
+            <div class="stat-card">
+              <div class="stat-label">TOTAL KINETIC ENERGY</div>
+              <div id="stat-energy" class="stat-value">0 J</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">MAX CHAIN STEP</div>
+              <div id="stat-chain" class="stat-value">0</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls actions row -->
+        <div class="hud-actions">
+          <button id="hud-reset-btn" class="hud-btn">RESET PETRI DISH</button>
+          <div class="hud-row">
+            <button id="hud-speed-btn" class="hud-btn">▶ SPEED: 1.0x</button>
+            <button id="hud-mute-btn" class="hud-btn">🔊 SOUND</button>
+          </div>
+          <button id="hud-back-btn" class="neon-btn" style="width: 100%; margin-top: 10px; padding: 12px 0;">EXIT DIAGNOSTICS</button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 4. VICTORY OVERLAY MODAL -->
+  <div id="win-modal" class="modal-overlay hidden">
+    <div class="modal-content glass">
+      <div class="modal-title win-title">DIAGNOSTIC COMPLETED</div>
+      <div class="modal-icon-svg">
+        <svg viewBox="0 0 100 100" width="80" height="80">
+          <circle cx="50" cy="50" r="44" fill="none" stroke="#00f0ff" stroke-width="4" />
+          <path d="M30 50 L45 65 L70 35" fill="none" stroke="#39ff14" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+      <p style="margin-bottom: 20px; font-size: 1.05rem;">Apex DNA sequence successfully stabilized. Chain reaction completed goals.</p>
+      
+      <div class="modal-stats">
+        <div class="modal-stat-line">
+          <span class="modal-stat-label">ENERGY GENERATED</span>
+          <span id="win-energy" class="modal-stat-value">0 J</span>
+        </div>
+        <div class="modal-stat-line">
+          <span class="modal-stat-label">REACTION DECORUM</span>
+          <span id="win-chain" class="modal-stat-value">0 levels</span>
+        </div>
+      </div>
+      
+      <div class="modal-buttons">
+        <button id="win-menu-btn" class="hud-btn modal-btn">LAB FILE</button>
+        <button id="win-next-btn" class="neon-btn modal-btn">NEXT TARGET</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. DEFEAT OVERLAY MODAL -->
+  <div id="lose-modal" class="modal-overlay hidden">
+    <div class="modal-content glass">
+      <div class="modal-title lose-title">DIAGNOSTIC FAILED</div>
+      <div class="modal-icon-svg">
+        <svg viewBox="0 0 100 100" width="80" height="80">
+          <circle cx="50" cy="50" r="44" fill="none" stroke="#ef4444" stroke-width="4" />
+          <path d="M35 35 L65 65 M65 35 L35 65" fill="none" stroke="#ef4444" stroke-width="6" stroke-linecap="round" />
+        </svg>
+      </div>
+      <p style="margin-bottom: 20px; font-size: 1.05rem;">Critical failure: Reaction faded out before targets could be fully reached.</p>
+      
+      <div class="modal-buttons">
+        <button id="lose-menu-btn" class="hud-btn modal-btn">LAB FILE</button>
+        <button id="lose-retry-btn" class="neon-btn modal-btn" style="border-color: #ef4444; color: #ef4444; box-shadow: 0 0 10px rgba(239, 68, 68, 0.1);">RE-INJECT</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./src/main.ts"></script>
+</body>
+</html>
