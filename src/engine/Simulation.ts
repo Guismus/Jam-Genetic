@@ -49,8 +49,8 @@ export class Simulation {
   triggerCell(cell: GridCell, depth: number, type: TriggerType) {
     if (cell.state !== 'idle') return;
 
-    // Each trigger type only matches its own stimulus type
-    if (cell.genome.trigger !== type) {
+    // Each trigger type only matches its own stimulus type, except IMPACT which reacts to any stimulus
+    if (cell.genome.trigger !== 'IMPACT' && cell.genome.trigger !== type) {
       return;
     }
 
