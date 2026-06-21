@@ -32,6 +32,7 @@ export class GameUI {
   private gameScreen!: HTMLElement;
   private winModal!: HTMLElement;
   private loseModal!: HTMLElement;
+  private solutionModal!: HTMLElement;
 
   constructor() {
     this.grid = new Grid();
@@ -70,6 +71,7 @@ export class GameUI {
     this.gameScreen = document.getElementById('game-screen')!;
     this.winModal = document.getElementById('win-modal')!;
     this.loseModal = document.getElementById('lose-modal')!;
+    this.solutionModal = document.getElementById('solution-modal')!;
 
     const canvas = document.getElementById('game-canvas') as HTMLCanvasElement;
     this.renderer = new CanvasRenderer(canvas, this.grid, this.particles);
@@ -175,6 +177,17 @@ export class GameUI {
       audio.playClick();
       this.loseModal.classList.add('hidden');
       this.showScreen('levels');
+    });
+
+    // 5b. Solution Modal
+    document.getElementById('hud-solution-btn')?.addEventListener('click', () => {
+      audio.playClick();
+      this.showSolution();
+    });
+
+    document.getElementById('solution-close-btn')?.addEventListener('click', () => {
+      audio.playClick();
+      this.solutionModal.classList.add('hidden');
     });
 
     // 5. Canvas Interactions (Click/Hover/Selection)
@@ -339,6 +352,12 @@ export class GameUI {
     this.showScreen('game');
     this.resetHUDValues();
     this.renderHUDInfo();
+
+    // Show solution button only for levels with solutions
+    const solutionBtn = document.getElementById('hud-solution-btn');
+    if (solutionBtn) {
+      solutionBtn.classList.toggle('hidden', !level.solution || level.solution.length === 0);
+    }
   }
 
   private startSandbox() {
@@ -382,6 +401,10 @@ export class GameUI {
     this.showScreen('game');
     this.resetHUDValues();
     this.renderHUDInfo();
+
+    // Hide solution button in sandbox
+    const solutionBtn = document.getElementById('hud-solution-btn');
+    if (solutionBtn) solutionBtn.classList.add('hidden');
   }
 
   private initSandboxToolbar() {
@@ -545,6 +568,25 @@ export class GameUI {
     
     const level = this.isSandbox ? { width: 10, height: 10 } as any : this.selectedLevel!;
     this.sim.start(level, { x, y }, type);
+  }
+
+  private showSolution() {
+    if (!this.selectedLevel || !this.selectedLevel.solution) return;
+
+    const container = document.getElementById('solution-steps')!;
+    let html = '';
+
+    this.selectedLevel.solution.forEach((step, i) => {
+      html += `
+        <div class="solution-step">
+          <div class="solution-step-num">${i + 1}</div>
+          <div class="solution-step-text">${step.text}</div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+    this.solutionModal.classList.remove('hidden');
   }
 
   private handleSimulationEnd(success: boolean) {

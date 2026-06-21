@@ -110,6 +110,13 @@
           <div class="hud-row">
             <button id="hud-speed-btn" class="hud-btn">▶ SPEED: 1.0x</button>
             <button id="hud-mute-btn" class="hud-btn">🔊 SOUND</button>
+            <button id="hud-solution-btn" class="hud-btn solution-btn" title="Voir la solution">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18h6"/>
+                <path d="M10 22h4"/>
+                <path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+              </svg>
+            </button>
           </div>
           <button id="hud-back-btn" class="neon-btn" style="width: 100%; margin-top: 10px; padding: 12px 0;">EXIT DIAGNOSTICS</button>
         </div>
@@ -164,6 +171,19 @@
       <div class="modal-buttons">
         <button id="lose-menu-btn" class="hud-btn modal-btn">LAB FILE</button>
         <button id="lose-retry-btn" class="neon-btn modal-btn" style="border-color: #ef4444; color: #ef4444; box-shadow: 0 0 10px rgba(239, 68, 68, 0.1);">RE-INJECT</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. SOLUTION OVERLAY MODAL -->
+  <div id="solution-modal" class="modal-overlay hidden">
+    <div class="modal-content glass solution-modal-content">
+      <div class="modal-title solution-title">💡 SOLUTION</div>
+      <div id="solution-steps" class="solution-steps">
+        <!-- Populated dynamically -->
+      </div>
+      <div class="modal-buttons">
+        <button id="solution-close-btn" class="neon-btn modal-btn">COMPRIS</button>
       </div>
     </div>
   </div>

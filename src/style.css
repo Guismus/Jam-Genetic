@@ -797,6 +797,82 @@ h1 {
 .text-success { color: var(--color-TOXIN); }
 .text-danger { color: #ef4444; }
 
+/* Solution Button */
+.solution-btn {
+  flex-grow: 0 !important;
+  width: 40px;
+  min-width: 40px;
+  padding: 10px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f59e0b;
+  border-color: rgba(245, 158, 11, 0.2);
+  transition: all 0.3s ease;
+}
+
+.solution-btn:hover {
+  background: rgba(245, 158, 11, 0.1) !important;
+  border-color: #f59e0b;
+  color: #fbbf24;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.25);
+}
+
+.solution-btn svg {
+  flex-shrink: 0;
+}
+
+/* Solution Modal */
+.solution-modal-content {
+  width: 440px;
+  text-align: left;
+}
+
+.solution-title {
+  color: #f59e0b;
+  text-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+  text-align: center;
+}
+
+.solution-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.solution-step {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: rgba(15, 23, 42, 0.5);
+  border-radius: 8px;
+  padding: 12px 14px;
+  border-left: 3px solid #f59e0b;
+}
+
+.solution-step-num {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.1);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.solution-step-text {
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--text-primary);
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 4px;

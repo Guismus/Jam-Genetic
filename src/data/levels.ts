@@ -27,6 +27,10 @@ export interface WallConfig {
 
 export type ObjectiveType = 'clear_all' | 'mutate_target' | 'min_energy' | 'min_chain';
 
+export interface SolutionStep {
+  text: string;
+}
+
 export interface Level {
   id: number;
   name: string;
@@ -45,6 +49,7 @@ export interface Level {
   objectiveValue?: number;
   cells: CellConfig[];
   walls: WallConfig[];
+  solution?: SolutionStep[];
 }
 
 export const LEVELS: Level[] = [
@@ -77,7 +82,12 @@ export const LEVELS: Level[] = [
         genome: { trigger: 'HEAT', action: 'BURST', release: 'HEAT', modifier: 'NONE' }
       }
     ],
-    walls: []
+    walls: [],
+    solution: [
+      { text: "Cliquez sur la cellule de gauche (éditable) pour ouvrir le Gene Splicer." },
+      { text: "Changez le gène Trigger de SHOCK → HEAT." },
+      { text: "Injectez HEAT sur la cellule de gauche (ou à côté)." }
+    ]
   },
   {
     id: 2,
@@ -114,7 +124,13 @@ export const LEVELS: Level[] = [
         genome: { trigger: 'TOXIN', action: 'BURST', release: 'TOXIN', modifier: 'NONE' }
       }
     ],
-    walls: []
+    walls: [],
+    solution: [
+      { text: "Cliquez sur la cellule du milieu (éditable)." },
+      { text: "Changez son Trigger en HEAT (pour capter la chaleur)." },
+      { text: "Changez son Release en TOXIN (pour activer la cellule verte)." },
+      { text: "Injectez HEAT sur la cellule de gauche." }
+    ]
   },
   {
     id: 3,
@@ -155,6 +171,12 @@ export const LEVELS: Level[] = [
     walls: [
       { x: 3, y: 2 },
       { x: 3, y: 4 }
+    ],
+    solution: [
+      { text: "Cliquez sur la cellule éditable en (1,3)." },
+      { text: "Changez son Trigger en SHOCK (pour capter l'injection)." },
+      { text: "Changez son Action en BURST et son Release en HEAT." },
+      { text: "Injectez SHOCK sur la cellule en (1,3). La chaîne SHOCK → BURST/HEAT → MUTATE propage jusqu'à la cible." }
     ]
   },
   {
@@ -196,6 +218,11 @@ export const LEVELS: Level[] = [
       { x: 5, y: 1 },
       { x: 5, y: 2 },
       { x: 5, y: 3 }
+    ],
+    solution: [
+      { text: "Cliquez sur la cellule éditable en (3,2)." },
+      { text: "Changez son Action en SPLIT (les cellules filles glissent le long des murs pour contourner la barrière)." },
+      { text: "Injectez TOXIN sur la cellule de gauche en (1,2)." }
     ]
   },
   {
@@ -239,7 +266,13 @@ export const LEVELS: Level[] = [
         genome: { trigger: 'HEAT', action: 'BURST', release: 'HEAT', modifier: 'NONE' }
       }
     ],
-    walls: []
+    walls: [],
+    solution: [
+      { text: "Cliquez sur la cellule éditable en (3,2)." },
+      { text: "Changez son Modifier en DELAY pour retarder son explosion." },
+      { text: "La cellule (4,2) explose d'abord, puis (3,2) explose ensuite sans que ses particules soient bloquées." },
+      { text: "Injectez HEAT sur la cellule (1,2)." }
+    ]
   },
   {
     id: 6,
@@ -267,7 +300,12 @@ export const LEVELS: Level[] = [
       { x: 5, y: 2, isEditable: false, genome: { trigger: 'SHOCK', action: 'BURST', release: 'SHOCK', modifier: 'NONE' } },
       { x: 2, y: 1, isEditable: false, genome: { trigger: 'SHOCK', action: 'BURST', release: 'SHOCK', modifier: 'NONE' } }
     ],
-    walls: []
+    walls: [],
+    solution: [
+      { text: "Cliquez sur les cellules éditables." },
+      { text: "Ajoutez le modifier DUAL sur au moins 2 des 3 cellules éditables pour doubler les particules." },
+      { text: "Injectez SHOCK sur la cellule (1,2). L'amplification atteint le seuil d'énergie requis." }
+    ]
   },
   {
     id: 7,
@@ -294,6 +332,11 @@ export const LEVELS: Level[] = [
       { x: 4, y: 3 },
       { x: 4, y: 4 },
       { x: 4, y: 5 }
+    ],
+    solution: [
+      { text: "Cliquez sur la cellule éditable en (3,2)." },
+      { text: "Changez son Action en GROW. La cellule va se cloner vers la droite en passant par le trou dans le mur en (4,2)." },
+      { text: "Injectez TOXIN sur la cellule (1,3). La chaîne propage à travers le clone jusqu'à la cible." }
     ]
   },
   {
@@ -325,7 +368,12 @@ export const LEVELS: Level[] = [
       { x: 2, y: 6, isEditable: false, genome: { trigger: 'SHOCK', action: 'BURST', release: 'SHOCK', modifier: 'NONE' } },
       { x: 4, y: 6, isEditable: false, genome: { trigger: 'SHOCK', action: 'BURST', release: 'SHOCK', modifier: 'NONE' } }
     ],
-    walls: []
+    walls: [],
+    solution: [
+      { text: "Ajoutez le modifier CHAIN sur les cellules éditables pour augmenter la vitesse et la durée de vie des particules." },
+      { text: "Combinez avec DUAL sur certaines cellules pour multiplier les particules." },
+      { text: "Injectez SHOCK sur la cellule (1,1). La chaîne doit se propager à travers toutes les cellules pour atteindre 10 étapes." }
+    ]
   },
   {
     id: 9,
@@ -353,6 +401,11 @@ export const LEVELS: Level[] = [
       { x: 2, y: 1 }, { x: 2, y: 2 }, { x: 2, y: 3 },
       { x: 3, y: 4 }, { x: 3, y: 5 },
       { x: 5, y: 3 }, { x: 5, y: 4 }, { x: 5, y: 5 }, { x: 5, y: 6 }
+    ],
+    solution: [
+      { text: "Cellule (1,4) : changez l'Action en SHOOT et le Release en HEAT pour tirer vers la cellule (4,4)." },
+      { text: "Cellule (4,4) : changez le Trigger en HEAT, l'Action en SHOOT et le Release en SHOCK pour passer la barrière." },
+      { text: "Injectez HEAT sur la cellule (1,1). La chaîne traverse le labyrinthe par rebonds." }
     ]
   },
   {
@@ -382,6 +435,12 @@ export const LEVELS: Level[] = [
     ],
     walls: [
       { x: 3, y: 3 }, { x: 5, y: 5 }, { x: 4, y: 4 }
+    ],
+    solution: [
+      { text: "Cellule (2,2) : changez le Release en HEAT pour propager vers les cellules HEAT du plateau." },
+      { text: "Cellule (6,3) : changez le Trigger en SHOCK et le Release en TOXIN pour atteindre la cellule TOXIN." },
+      { text: "Cellule (5,6) : changez le Trigger en HEAT et le Release en SHOCK pour connecter la chaîne vers (7,5)." },
+      { text: "Injectez SHOCK sur la cellule (2,2), puis HEAT sur les zones restantes si nécessaire." }
     ]
   }
 ];
