@@ -84,9 +84,9 @@ export const LEVELS: Level[] = [
     ],
     walls: [],
     solution: [
-      { text: "Cliquez sur la cellule de gauche (éditable) pour ouvrir le Gene Splicer." },
-      { text: "Changez le gène Trigger de SHOCK → HEAT." },
-      { text: "Injectez HEAT sur la cellule de gauche (ou à côté)." }
+      { text: "Click on the left cell (editable) to open the Gene Splicer." },
+      { text: "Change the Trigger gene from SHOCK → HEAT." },
+      { text: "Inject HEAT on or near the left cell." }
     ]
   },
   {
@@ -126,10 +126,10 @@ export const LEVELS: Level[] = [
     ],
     walls: [],
     solution: [
-      { text: "Cliquez sur la cellule du milieu (éditable)." },
-      { text: "Changez son Trigger en HEAT (pour capter la chaleur)." },
-      { text: "Changez son Release en TOXIN (pour activer la cellule verte)." },
-      { text: "Injectez HEAT sur la cellule de gauche." }
+      { text: "Click on the middle cell (editable)." },
+      { text: "Change its Trigger to HEAT (to catch the heat)." },
+      { text: "Change its Release to TOXIN (to activate the green cell)." },
+      { text: "Inject HEAT on the left cell." }
     ]
   },
   {
@@ -173,10 +173,10 @@ export const LEVELS: Level[] = [
       { x: 3, y: 4 }
     ],
     solution: [
-      { text: "Cliquez sur la cellule éditable en (1,3)." },
-      { text: "Changez son Trigger en SHOCK (pour capter l'injection)." },
-      { text: "Changez son Action en BURST et son Release en HEAT." },
-      { text: "Injectez SHOCK sur la cellule en (1,3). La chaîne SHOCK → BURST/HEAT → MUTATE propage jusqu'à la cible." }
+      { text: "Click on the editable cell at (1,3)." },
+      { text: "Change its Trigger to SHOCK (to catch the injection)." },
+      { text: "Change its Action to BURST and its Release to HEAT." },
+      { text: "Inject SHOCK on cell (1,3). The chain SHOCK → BURST/HEAT → MUTATE propagates to the target." }
     ]
   },
   {
@@ -220,9 +220,9 @@ export const LEVELS: Level[] = [
       { x: 5, y: 3 }
     ],
     solution: [
-      { text: "Cliquez sur la cellule éditable en (3,2)." },
-      { text: "Changez son Action en SPLIT (les cellules filles glissent le long des murs pour contourner la barrière)." },
-      { text: "Injectez TOXIN sur la cellule en (1,2) ou à côté." }
+      { text: "Click on the editable cell at (3,2)." },
+      { text: "Change its Action to SPLIT (daughter cells slide along walls to bypass the barrier)." },
+      { text: "Inject TOXIN on or near cell (1,2)." }
     ]
   },
   {
@@ -268,10 +268,10 @@ export const LEVELS: Level[] = [
     ],
     walls: [],
     solution: [
-      { text: "Cliquez sur la cellule éditable en (3,2)." },
-      { text: "Changez son Modifier en DELAY pour retarder son explosion." },
-      { text: "La cellule (4,2) explose d'abord, puis (3,2) explose ensuite sans que ses particules soient bloquées." },
-      { text: "Injectez HEAT sur la cellule (1,2)." }
+      { text: "Click on the editable cell at (3,2)." },
+      { text: "Change its Modifier to DELAY to stagger its explosion." },
+      { text: "Cell (4,2) explodes first, then (3,2) explodes after without its particles being blocked." },
+      { text: "Inject HEAT on cell (1,2)." }
     ]
   },
   {
@@ -302,9 +302,9 @@ export const LEVELS: Level[] = [
     ],
     walls: [],
     solution: [
-      { text: "Cliquez sur les cellules éditables." },
-      { text: "Ajoutez le modifier DUAL sur au moins 2 des 3 cellules éditables pour doubler les particules." },
-      { text: "Injectez SHOCK sur la cellule (1,2). L'amplification atteint le seuil d'énergie requis." }
+      { text: "Click on the editable cells." },
+      { text: "Add the DUAL modifier on at least 2 of the 3 editable cells to double the particles." },
+      { text: "Inject SHOCK on cell (1,2). The amplification reaches the required energy threshold." }
     ]
   },
   {
@@ -334,9 +334,9 @@ export const LEVELS: Level[] = [
       { x: 4, y: 5 }
     ],
     solution: [
-      { text: "Cliquez sur la cellule éditable en (3,2)." },
-      { text: "Changez son Action en GROW. La cellule va se cloner vers la droite en passant par le trou dans le mur en (4,2)." },
-      { text: "Injectez TOXIN sur la cellule (1,3). La chaîne propage à travers le clone jusqu'à la cible." }
+      { text: "Click on the editable cell at (3,2)." },
+      { text: "Change its Action to GROW. The cell will clone itself to the right through the gap in the wall at (4,2)." },
+      { text: "Inject TOXIN on cell (1,3). The chain propagates through the clone to the target." }
     ]
   },
   {
@@ -370,9 +370,9 @@ export const LEVELS: Level[] = [
     ],
     walls: [],
     solution: [
-      { text: "Ajoutez le modifier CHAIN sur les cellules éditables pour augmenter la vitesse et la durée de vie des particules." },
-      { text: "Combinez avec DUAL sur certaines cellules pour multiplier les particules." },
-      { text: "Injectez SHOCK sur la cellule (1,1). La chaîne doit se propager à travers toutes les cellules pour atteindre 10 étapes." }
+      { text: "Add the CHAIN modifier on editable cells to boost particle speed and lifetime." },
+      { text: "Combine with DUAL on some cells to multiply particles." },
+      { text: "Inject SHOCK on cell (1,1). The chain must propagate through all cells to reach 10 steps." }
     ]
   },
   {
@@ -403,9 +403,9 @@ export const LEVELS: Level[] = [
       { x: 5, y: 3 }, { x: 5, y: 4 }, { x: 5, y: 5 }, { x: 5, y: 6 }
     ],
     solution: [
-      { text: "Cellule (1,4) : changez l'Action en SHOOT et le Release en HEAT pour tirer vers la cellule (4,4)." },
-      { text: "Cellule (4,4) : changez le Trigger en HEAT, l'Action en SHOOT et le Release en SHOCK pour passer la barrière." },
-      { text: "Injectez HEAT sur la cellule (1,1). La chaîne traverse le labyrinthe par rebonds." }
+      { text: "Cell (1,4): change Action to SHOOT and Release to HEAT to fire towards cell (4,4)." },
+      { text: "Cell (4,4): change Trigger to HEAT, Action to SHOOT and Release to SHOCK to pass the barrier." },
+      { text: "Inject HEAT on cell (1,1). The chain traverses the maze via bounces." }
     ]
   },
   {
@@ -437,10 +437,10 @@ export const LEVELS: Level[] = [
       { x: 3, y: 3 }, { x: 5, y: 5 }, { x: 4, y: 4 }
     ],
     solution: [
-      { text: "Cellule (2,2) : changez le Release en HEAT pour propager vers les cellules HEAT du plateau." },
-      { text: "Cellule (6,3) : changez le Trigger en SHOCK et le Release en TOXIN pour atteindre la cellule TOXIN." },
-      { text: "Cellule (5,6) : changez le Trigger en HEAT et le Release en SHOCK pour connecter la chaîne vers (7,5)." },
-      { text: "Injectez SHOCK sur la cellule (2,2), puis HEAT sur les zones restantes si nécessaire." }
+      { text: "Cell (2,2): change Release to HEAT to propagate towards the HEAT cells on the board." },
+      { text: "Cell (6,3): change Trigger to SHOCK and Release to TOXIN to reach the TOXIN cell." },
+      { text: "Cell (5,6): change Trigger to HEAT and Release to SHOCK to connect the chain towards (7,5)." },
+      { text: "Inject SHOCK on cell (2,2), then HEAT on remaining zones if needed." }
     ]
   }
 ];
