@@ -205,7 +205,7 @@ export const LEVELS: Level[] = [
         x: 3,
         y: 2,
         isEditable: true,
-        genome: { trigger: 'TOXIN', action: 'BURST', release: 'TOXIN', modifier: 'NONE' } // Change action to SHOOT to pass the barrier
+        genome: { trigger: 'TOXIN', action: 'BURST', release: 'TOXIN', modifier: 'NONE' } // Change action to SPLIT to slide around the barrier
       },
       {
         x: 7,
@@ -222,7 +222,7 @@ export const LEVELS: Level[] = [
     solution: [
       { text: "Cliquez sur la cellule éditable en (3,2)." },
       { text: "Changez son Action en SPLIT (les cellules filles glissent le long des murs pour contourner la barrière)." },
-      { text: "Injectez TOXIN sur la cellule de gauche en (1,2)." }
+      { text: "Injectez TOXIN sur la cellule en (1,2) ou à côté." }
     ]
   },
   {
